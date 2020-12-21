@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+  <link href="/Required_Files/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script type="text/javascript" src="Required_Files/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="Required_Files/css/bootstrap.min.css">
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+   
+    <title>Geometric Progression</title>
+
+    <noscript>You have disabled scripts in browser or have a browser that doesn't support script.</noscript>
+
+   
+</head>
+
+<body>
+
+    <div >
+        <button type="button" class="btn btn-dark m-2"> <a href="Calculator.html" style="text-decoration: none; color:white;"> Home </a></button>
+      </div>
+    
+
+   <!--    GP DIV   -->
+   <div class="text-center m-auto my-4">
+
+    <h3>Geometric Progression</h3>
+
+    <hr>
+
+    <table class="text-center my-4 m-auto">
+        <tr>
+            <td><input type="text" id="GP_a" class="text-center" style="font-size: 1.5em;"></td>
+            <td>
+                <h3 class="text-start"> = First term (a)</h3>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" id="GP_r" class="text-center" style="font-size: 1.5em;"></td>
+            <td>
+                <h3 class="text-start"> = Common Ratio (r)</h3>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" id="GP_n" min="1" class="text-center" style="font-size: 1.5em;"></td>
+            <td>
+                <h3 class="text-start"> = Number Of Term (n)</h3>
+            </td>
+        </tr>
+    </table>
+
+
+    <!-- Button trigger modal -->
+<button type="button" onclick="GP()" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+   n th Term
+   </button>
+
+   <button type="button" onclick="GP_Sum()" class="btn btn-success m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Sum
+   </button>
+ 
+  
+   
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">Geometric Progression</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+             <h2 id="ans"></h2>
+           </div>
+         
+       </div>
+     </div>
+   </div>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+<style>
+
+    input {
+        height: 3em;
+        width: 3em;
+        margin: 0.1em;
+      }
+
+      h3{
+        font-family:'Times New Roman', Times, serif;
+      }
+
+
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+
+</style>
+
+<script>
+ 
+    function GP(){
+        var a = parseFloat(document.getElementById('GP_a').value);
+        var r = parseFloat(document.getElementById('GP_r').value);
+        var n = parseFloat(document.getElementById('GP_n').value);
+
+       //let res = a * Math.pow(r, n-1);
+
+        document.getElementById("ans").innerHTML =  a * Math.pow(r, n-1);
+        console.log( a * Math.pow(r, n-1));
+
+    }
+
+    //Sn = a[(rn-1)/(r-1)]
+    //Sn = na if r=1 if r==1
+
+    function GP_Sum(){
+        var a = parseInt(document.getElementById('GP_a').value);
+        var r = parseInt(document.getElementById('GP_r').value);
+        var n = parseInt(document.getElementById('GP_n').value);
+
+        if(r == 1){
+            document.getElementById("ans").innerHTML = (n*a);
+            console.log(n*a);
+            return;
+        }
+
+        if(r>1){
+            document.getElementById("ans").innerHTML = a*((Math.pow(r, n)-1)/(r-1));
+            console.log(a*((r*n-1)/(r-1)));
+            return;
+        }
+  
+       
+  
+    }
+</script>
+</html>

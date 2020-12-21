@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+  <link href="/Required_Files/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="Required_Files/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="Required_Files/css/bootstrap.min.css">
+
+   
+    <title>Inverse</title>
+
+    <noscript>You have disabled scripts in browser or have a browser that doesn't support script.</noscript>
+
+   
+</head>
+
+<body>
+
+  <div >
+    <button type="button" class="btn btn-dark m-2"> <a href="Calculator.html" style="text-decoration: none; color:white;"> Home </a></button>
+  </div>
+
+    <!--    DETERMINANT / INVERSE DIV   -->
+    <div class="text-center m-auto mt-4">
+
+        <h2>Matrix Determinant Calculator</h2>
+
+        <hr>
+
+        <input type="number" id="rowcolm" min="2" max="10" class="text-center form-control" style="height: 2em; width:30%; font-size:1.5em; margin:auto; " placeholder="Order Of Matrix" required>
+
+        <button type="button" class="btn btn-success m-2" onclick="creatematrix()">Create Matrix</button>
+        <button type="button" class="btn btn-danger m-2" onclick="clrscr()" id="clr" style="visibility: hidden;">Clear</button>
+
+        <div id="matrix" class="mb-4">
+
+        </div>
+
+        <!-- Button trigger modal -->
+<button type="button" id="Dbtn" onclick="Determinant()" style="visibility: hidden;" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+   Determinant
+  </button>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">  Matrix Determinant </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+            <h2 id="ans"></h2>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+    </div>
+      
+
+</body>
+
+<style>
+
+    input {
+        height: 3em;
+        width: 3em;
+        margin: 0.1em;
+      }
+
+
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+h3{
+  font-family:'Times New Roman', Times, serif;
+}
+
+
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+<script>
+  
+    
+function creatematrix() {
+    var no = document.getElementById("rowcolm").value;
+  
+    if(no <= 1 || no > 10){
+      return;
+    }
+    document.getElementById('clr').style.visibility = "visible";
+    document.getElementById('matrix').innerHTML = '';
+
+    document.getElementById('matrix').innerHTML = '<h3>Enter Elements</h3><br>';
+  
+    for (var j = 1; j <= no; j++) {
+      for (var i = 1; i <= no; i++) {
+        var textfield = document.createElement("input");
+        textfield.type = "number";
+        textfield.className = "text-center"
+        textfield.id = j * 10 + i;
+        //textfield.placeholder = j * 10 + i;
+  
+        document.getElementById("matrix").appendChild(textfield);
+  
+        if (i == no) {
+          var br = document.createElement("br");
+          document.getElementById("matrix").appendChild(br);
+        }
+      }
+    }
+
+    document.getElementById('Dbtn').style.visibility = 'visible';
+
+  }
+  
+  
+  function clrscr(){
+      document.getElementById('matrix').innerHTML = '';
+
+      document.getElementById('clr').style.visibility = "hidden";
+
+      document.getElementById('rowcolm').value = '';
+      
+      document.getElementById('Dbtn').style.visibility = 'hidden';
+  }
+
+
+function Determinant(){
+
+  var x = document.getElementById("rowcolm").value;
+
+  var myArray = [];
+  
+
+  for(let i=0; i<x; i++){
+    myArray[i] = [];
+    for(let j=0; j<x; j++){
+      //var id = i+1.toString() + ; 
+      var a = i+1;
+      var b = j+1;
+      var c = a*10+b;
+      var id = c.toString();
+      myArray[i][j] = document.getElementById(id).value;
+    }
+  }
+ // console.log(myArray);
+
+ // console.log(determinant(myArray, x));
+
+ var ans = determinant(myArray, x);
+
+  document.getElementById("ans").innerHTML = ans.toFixed(2);
+
+}
+
+function determinant(array,x)
+{/* Conversion of matrix to upper triangular */
+  var ratio, det;
+  for(i = 0; i < x; i++){
+    for(j = 0; j < x; j++){
+        if(j>i){
+            ratio = array[j][i]/array[i][i];
+            for(k = 0; k < x; k++){
+              array[j][k] -= ratio * array[i][k];
+            }
+        }
+    }
+}
+det = 1; //storage for determinant
+for(i = 0; i < x; i++)
+    det *= array[i][i];
+
+return det;
+}
+
+  
+</script>
+
+<script type="text/javascript" src="Required_Files/js/bootstrap.bundle.min.js"></script>
+
+</html>
