@@ -1,5 +1,7 @@
 # Virtual-Calculator Features
 
+## Project is live [Here](https://akhiparmar.github.io/Virtual-Calculator/Calculator.html)
+
 * **Matrix** 
   * Determinant Calculator
   * Inverse Calculator
